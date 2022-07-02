@@ -1,6 +1,9 @@
 name: Build Blazor App
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - mac
 
 jobs:
   build:
@@ -21,7 +24,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish with dotnet
-      run: dotnet publish --configuration Release -o published_app --no-build
+      run: dotnet publish --configuration Release -o published_app --no-build -p:GHPages=true
 
     - name: Publish artifacts
       uses: actions/upload-artifact@v2
